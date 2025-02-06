@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 class="page-title">Apply Filters</h1>
+<form action="/filters" method="POST" enctype="multipart/form-data" class="filter-form">
+    <label for="file">Upload Image/Audio File:</label>
+    <input type="file" name="file" required class="file-input">
+    
+    <label for="filter">Select Filter:</label>
+    <select name="filter" class="filter-select">
+        <option value="grayscale">Grayscale (Image)</option>
+        <option value="blur">Blur (Image)</option>
+        <option value="edges">Edge Detection (Image)</option>
+        <option value="contour">Contour (Image)</option>
+        <option value="low_pass">Low Pass (Audio)</option>
+        <option value="high_pass">High Pass (Audio)</option>
+        <option value="reverse">Reverse (Audio)</option>
+        <option value="speed_up">Speed Up (Audio)</option>
+        <option value="slow_down">Slow Down (Audio)</option>
+    </select>
+    
+    <button type="submit" class="submit-button">Apply Filter</button>
+</form>
+
+{% if filtered_file %}
+    <h2 class="result-title">Filtered Output:</h2>
+    {% if filtered_file.endswith('.mp3') or filtered_file.endswith('.wav') or filtered_file.endswith('.ogg') or filtered_file.endswith('.m4a') %}
+        <audio controls class="audio-player">
+            <source src="{{ filtered_file }}" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+    {% else %}
+        <img src="{{ filtered_file }}" alt="Filtered Image" class="filtered-image">
+    {% endif %}
+{% endif %}
+
+{% if error %}
+    <p class="error-message">{{ error }}</p>
+{% endif %}
+{% endblock %}
+
+

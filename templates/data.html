@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Data Visualization</h1>
+<p>Select a visualization style with unique, artistic effects!</p>
+
+<form action="/data" method="POST">
+    <label for="chart_type">Select Chart Type:</label>
+    <select name="chart_type">
+        <option value="heatmap">Abstract Heatmap</option>
+        <option value="bar_chart">Abstract Bar Chart</option>
+    </select>
+    
+    <button type="submit">Generate Visualization</button>
+</form>
+
+{% if chart_image %}
+    <h2>{{ chart_type }}</h2>
+    <img src="{{ chart_image }}" alt="Visualization">
+{% endif %}
+{% endblock %}
+

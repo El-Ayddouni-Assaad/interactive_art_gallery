@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Generative Art Gallery</h1>
+<p>Click a button below to run a generative art piece.</p>
+
+
+<label for="color">Choose a color:</label>
+<select id="color">
+    <option value="red">Red</option>
+    <option value="blue">Blue</option>
+    <option value="green">Green</option>
+    <option value="yellow">Yellow</option>
+    <option value="purple">Purple</option>
+    <option value="white">White</option>
+    <option value="random">Random</option>
+</select>
+
+
+<label for="shape">Choose a shape:</label>
+<select id="shape">
+    <option value="circle">Circle</option>
+    <option value="square">Square</option>
+    <option value="triangle">Triangle</option>
+    <option value="random">Random</option>
+</select>
+
+
+<ul>
+    <button onclick="runArt('art1')">Draw Shapes</button><br>
+    <button onclick="runArt('art2')">Draw Grid of Shapes</button><br>
+    <button onclick="runArt('art4')">Draw shape of your choice</button><br>
+    <p>see an art of spirales with random colors</p>
+    <button onclick="runArt('art3')">Draw Spirales</button>
+</ul>
+
+
+<div id="loading" style="display: none;">
+    <p>Loading...</p>
+    <img src="https://static.vecteezy.com/system/resources/previews/001/826/199/original/progress-loading-bar-buffering-download-upload-and-loading-icon-vector.jpg" alt="Loading">
+</div>
+
+{% if message %}
+    <p>{{ message }}</p>
+{% endif %}
+
+
+<script>
+    function runArt(artScript) {
+        var color = document.getElementById("color").value;
+        var shape = document.getElementById("shape").value;
+
+        
+        document.getElementById("loading").style.display = "block";
+
+        
+        window.location.href = "/run_art/" + artScript + "?color=" + color + "&shape=" + shape;
+    }
+</script>
+
+{% endblock %}
